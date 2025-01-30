@@ -28,10 +28,26 @@ const DadosPessoais = function(dado) {
 
 //console.log(DadosPessoais('11966578996'));
 
-
+const DadosConta = function(dado) {
+    let dados = dado
+    let registro = { nickname: '', profileImage: '', background: '' }
+    let status = false
+    
+    listaContatos.forEach(function(usuario) {
+        if (dados == usuario.number) {
+            registro.nickname = usuario.nickname;
+            registro.profileImage = usuario['profile-image'];
+            registro.background = usuario.background
+            status = true
+        }
+    })
+    return registro;
+}
+console.log(DadosConta('11966578996'))
 
 module.exports = {
-    DadosPessoais
+    DadosPessoais,
+    DadosConta
 }
 
 
