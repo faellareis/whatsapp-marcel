@@ -25,6 +25,30 @@ app.use((request, response, next)=>{
     next()
 })
 
-const contatos = require('./modulo/funcoes.js')
+const whatsapp = require('./modulo/funcoes.js')
 
-//app.get
+app.get('/v1/whatsapp/dados/:numero', async function(request, response) {
+    let numero = request.params.numero;
+    let dados = whatsapp.DadosPessoais(numero);
+  
+    if (dados.id) { 
+      response.status(200).json(dados);
+    } else {
+      response.status(404).json({ 'status': 404, 'message': 'Dados não localizados.' })
+    }
+  })
+
+  app.get('/v1/whatsapp/conta/:numero', async function(request, response) {
+    let numero = request.params.numero;
+    let dados = whatsapp.DadosConta(numero);
+  
+    if (dados.nickname) {
+      response.status(200).json(dados);
+    } else {
+      response.status(404).json({ 'status': 404, 'message': 'Dados não localizados.' });
+    }
+  })
+
+  app.listen('8080', function() {
+    console.log('API aguardando requisições...');
+  })

@@ -25,8 +25,7 @@ const DadosPessoais = function(dado) {
     })
     return registro;
 }
-
-//console.log(DadosPessoais('11966578996'));
+//console.log(DadosPessoais('11966578996'))
 
 const DadosConta = function(dado) {
     let dados = dado
@@ -43,13 +42,52 @@ const DadosConta = function(dado) {
     })
     return registro;
 }
-console.log(DadosConta('11966578996'))
+//console.log(DadosConta('11966578996'))
+
+const DadosContatos = function(dados) {
+    let registro = { name: '', description: '', image: '' };
+    let dado = dados
+    let lista = { lista: [] }
+
+    listaContatos.forEach(function(usuario) {
+        if (dado == usuario.number){
+            usuario.contacts.forEach(function(contato){
+            registro.name = contato.name;
+            registro.description = contato.description;
+            registro.image = contato.image
+
+            lista.lista.push(registro)
+            })
+        }
+    })
+    return lista
+}
+//console.log(DadosContatos('11966578996'));
+
+const DadosConversa = function(numero){
+    let dado = numero
+    let lista = {lista: []}
+
+    listaContatos.forEach(function(usuario){
+        if(dado == usuario.number){
+            lista.lista = usuario.contacts
+        }
+    })
+    return lista 
+}
+//console.log(DadosConversa('11966578996'))
+
+const getDadosUsuario = function(){
+
+}
 
 module.exports = {
     DadosPessoais,
-    DadosConta
+    DadosConta,
+    DadosContatos,
+    DadosConversa,
+    getDadosUsuario
 }
-
 
 
 
