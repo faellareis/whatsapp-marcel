@@ -74,6 +74,37 @@ app.get('/v1/whatsapp/conversa/:numero', cors(), async function(request, respons
   }  
 })
 
+app.get('/v1/whatsapp/filtro', cors(), async function(request, response){
+
+  let numero = request.query.numero
+  let dado = request.query.name
+  let dados = whatsapp.getFiltroContatos(numero, dado)
+
+  if(dados){
+      response.status(200)
+      response.json(dados)
+  }else{
+      response.status(404)
+      response.json({'status': 404, 'message': 'Não foi encontrado'})
+  }  
+})
+
+app.get('/v1/whatsapp/filtro2', cors(), async function(request, response){
+
+  let numero = request.query.numero
+  let user = request.query.name
+  let chave = request.query.palavraChave
+  let dados = whatsapp.getPalavra(numero, user, chave)
+
+  if(dados){
+      response.status(200)
+      response.json(dados)
+  }else{
+      response.status(404)
+      response.json({'status': 404, 'message': 'Não foi encontrado'})
+  }  
+})
+
   app.listen('8080', function() {
     console.log('API aguardando requisições...');
   })

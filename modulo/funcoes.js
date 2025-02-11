@@ -79,24 +79,19 @@ const DadosConversa = function(numero){
 
 const getFiltroContatos = function(dado, nomeDoContato){
     let usuario = Number(dado)
-    let listaContatos = contatos.contatos['whatsusers']
-    let registro
+    let mensagens = {}
     let contato = String(nomeDoContato).toUpperCase()
-    let dadosUsuario 
     let lista = []
     let status = false 
 
     listaContatos.forEach(function(dados){
-        dadosUsuario = dados.da
-        if(Number(dadosUsuario) == usuario){
-            dados.contacts.forEach(function(lista){
-                registro = lista.name 
-                if(String(registro).toUpperCase() == contato){
+        if(Number(usuario) == dados.number){
+            dados.contacts.forEach(function(item){
+                if(String(item.name).toUpperCase() == contato){
                     status = true 
-                    let mensagens = {}
                     mensagens.usuario = dados.account
-                    mensagens.contato = lista.name 
-                    mensagens.mensagens = lista.messages
+                    mensagens.contato = item.name 
+                    mensagens.mensagens = item.messages
                     lista.push(mensagens)
                 }
             })
@@ -109,14 +104,54 @@ const getFiltroContatos = function(dado, nomeDoContato){
         return status
     }
 }
-//console.log(getFiltroContatos('11966578996'))
+//console.log(getFiltroContatos('11987876567', 'Ana Maria'))
+
+const getPalavra = (id, name, palavraChave) => {
+    let usuarioNumero = Number(id)
+    let contato = String(name).toUpperCase()
+    let chave = String(palavraChave).toUpperCase()
+    let data = {}
+    let dadosUsuario = []
+    let status = false
+
+    listaContatos.forEach((item) => {
+        if(usuarioNumero == item.number)
+            data.nome = item.account
+            item.contacts.forEach((contacts) => {
+                if(contato == contacts.name.toUpperCase()) {
+                    data.contato = contacts.name
+                    contacts.messages.forEach((messages) => {
+                        if(messages.content.toUpperCase().includes(chave)) {
+                            dadosUsuario.push(
+                                            {
+                                                sender: messages.sender,
+                                                content: messages.content,
+                                                time: messages.time
+                                            }
+                                        )
+                            status = true
+                            data.conversas = dadosUsuario
+                        }
+                    })
+                }
+            })
+
+    })
+    if(status == true) {
+        return data
+    } else {
+        return status
+    }
+}
+//console.log(getPalavra('11987876567', 'Ana Maria', 'fine' ))
 
 module.exports = {
     DadosPessoais,
     DadosConta,
     DadosContatos,
     DadosConversa,
-    getFiltroContatos
+    getFiltroContatos,
+    getPalavra
 }
 
 
