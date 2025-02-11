@@ -77,16 +77,46 @@ const DadosConversa = function(numero){
 }
 //console.log(DadosConversa('11966578996'))
 
-const getDadosUsuario = function(){
+const getFiltroContatos = function(dado, nomeDoContato){
+    let usuario = Number(dado)
+    let listaContatos = contatos.contatos['whatsusers']
+    let registro
+    let contato = String(nomeDoContato).toUpperCase()
+    let dadosUsuario 
+    let lista = []
+    let status = false 
 
+    listaContatos.forEach(function(dados){
+        dadosUsuario = dados.da
+        if(Number(dadosUsuario) == usuario){
+            dados.contacts.forEach(function(lista){
+                registro = lista.name 
+                if(String(registro).toUpperCase() == contato){
+                    status = true 
+                    let mensagens = {}
+                    mensagens.usuario = dados.account
+                    mensagens.contato = lista.name 
+                    mensagens.mensagens = lista.messages
+                    lista.push(mensagens)
+                }
+            })
+        }
+    })
+
+    if (status == true){
+        return lista
+    }else{
+        return status
+    }
 }
+//console.log(getFiltroContatos('11966578996'))
 
 module.exports = {
     DadosPessoais,
     DadosConta,
     DadosContatos,
     DadosConversa,
-    getDadosUsuario
+    getFiltroContatos
 }
 
 

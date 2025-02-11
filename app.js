@@ -5,7 +5,6 @@ Autor: Rafa
 Versão: 1.0
 */
 
-
 //npm install express 
 //npm install cors 
 //npm install body-parser
@@ -48,6 +47,32 @@ app.get('/v1/whatsapp/dados/:numero', async function(request, response) {
       response.status(404).json({ 'status': 404, 'message': 'Dados não localizados.' });
     }
   })
+
+  app.get('/v1/whatsapp/contatos/:numero', cors(), async function(request, response){
+    let numero = request.params.numero;
+    let dados = whatsapp.DadosContatos(numero);
+
+    if(dados){
+        response.status(200)
+        response.json(dados)
+    }else{
+        response.status(404)
+        response.json({'status': 404, 'message': 'Não foi encontrado'})
+    }  
+})
+
+app.get('/v1/whatsapp/conversa/:numero', cors(), async function(request, response){
+  let numero = request.params.numero;
+  let dados = whatsapp.DadosConversa(numero);
+
+  if(dados){
+      response.status(200)
+      response.json(dados)
+  }else{
+      response.status(404)
+      response.json({'status': 404, 'message': 'Não foi encontrado'})
+  }  
+})
 
   app.listen('8080', function() {
     console.log('API aguardando requisições...');
