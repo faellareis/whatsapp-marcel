@@ -1,14 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whatsapp-API</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-    <title>Whatsapp API</title>
+    <script src="app.js" defer></script>
 </head>
 <body>
-    <div id="contatos"></div>
-    
+    <div class="aplicativo-container">
+        <div class="barra-lateral">
+            <header class="cabecalho-barra-lateral">
+                <h3>CONVERSAS</h3>
+            </header>
+            <div class="barra-pesquisa">
+                <input type="text" placeholder="Pesquise conversas..." class="numero-input">
+                <button class="search-button" id="searchButton">Pesquisar</button>
+            </div>
+            <div class="lista-conversas" id="listaConversas">
+            </div>
+        </div>
+        <div class="area-chat">
+            <div class="cabecalho-chat">
+                <h3 id="nomeContato">Selecione uma conversa</h3>
+            </div>
+            <div class="mensagens" id="mensagens">
+            </div>
+            <div class="entrada-mensagem">
+                <input type="text" id="entradaMensagem" placeholder="Digite uma mensagem...">
+                <button id="botaoEnviar">Enviar</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
