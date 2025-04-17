@@ -45,24 +45,26 @@ const DadosConta = function(dado) {
 //console.log(DadosConta('11966578996'))
 
 const DadosContatos = function(dados) {
-    let contatosData = null; 
+    
+    let dado = dados
+    let lista = { lista: [] }
 
     listaContatos.forEach(function(usuario) {
-        if (String(dados) === String(usuario.number)) { 
-            contatosData = {
-                nome: usuario.account,
-                contatos: usuario.contacts.map(contato => ({
-                    nome: contato.name,
-                    descricao: contato.description,
-                    imagem: contato.image
-                }))
-            }
+        if (dado == usuario.number){
+            
+            usuario.contacts.forEach(function(contato){
+                let registro = { name: '', description: '', image: '' };
+                registro.name = contato.name;
+                registro.description = contato.description;
+                registro.image = contato.image
+
+                lista.lista.push(registro)
+            })
         }
     })
-    return contatosData 
+    return lista
 }
 //console.log(DadosContatos('11966578996'));
-
 
 const DadosConversa = function(numero){
     let dado = numero
