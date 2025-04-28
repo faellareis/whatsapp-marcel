@@ -106,7 +106,7 @@ const getFiltroContatos = function(dado, nomeDoContato){
         return status
     }
 }
-//console.log(getFiltroContatos('11987876567', 'Ana Maria'))
+console.log(getFiltroContatos('11987876567', 'Ana Maria'))
 
 const getPalavra = (id, name, palavraChave) => {
     let usuarioNumero = Number(id)
